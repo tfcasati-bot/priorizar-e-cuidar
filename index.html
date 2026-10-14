@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#4b2d20">
+  <meta name="description" content="Uma ferramenta acolhedora para descarregar, priorizar e organizar uma semana possível.">
+  <title>Priorizar também é cuidar — Como Eu Dou Conta</title>
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./organizacao-extra.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Navegação principal">
+      <a class="brand" href="#inicio" data-view-link="inicio">
+        <span class="brand-heart" aria-hidden="true">♡</span>
+        <span><small>Como Eu</small> Dou Conta</span>
+      </a>
+
+      <nav class="main-nav">
+        <button class="nav-item active" type="button" data-view="inicio"><span>⌂</span> Início</button>
+        <button class="nav-item" type="button" data-view="descarrego"><span>≋</span> Descarrego <b id="inbox-count">0</b></button>
+        <button class="nav-item" type="button" data-view="prioridades"><span>✓</span> Prioridades</button>
+        <button class="nav-item" type="button" data-view="rotina"><span>♡</span> Minha rotina</button>
+        <button class="nav-item" type="button" data-view="agenda"><span>□</span> Agenda</button>
+        <a class="nav-item nav-link" href="./saude.html"><span>✚</span> Central de Saúde</a>
+        <a class="nav-item nav-link" href="./roda.html"><span>◉</span> Minha Roda da Vida</a>
+      </nav>
+
+      <div class="weeks-block">
+        <div class="weeks-heading"><span>Minhas semanas</span><button type="button" id="add-week" title="Adicionar semana" aria-label="Adicionar uma nova semana">+</button></div>
+        <div id="week-list" class="week-list"></div>
+      </div>
+
+      <div class="save-card">
+        <span class="save-dot" aria-hidden="true"></span>
+        <div><strong id="save-status">Tudo salvo</strong><small>neste navegador</small></div>
+      </div>
+      <div class="backup-actions">
+        <button type="button" id="export-data">Baixar backup</button>
+        <label for="import-data">Restaurar backup</label>
+        <input id="import-data" type="file" accept="application/json" hidden>
+      </div>
+    </aside>
+
+    <main class="content">
+      <header class="mobile-header">
+        <button type="button" id="menu-toggle" aria-label="Abrir menu">☰</button>
+        <span>Como Eu Dou Conta</span>
+        <span class="save-dot" aria-label="Salvo"></span>
+      </header>
+
+      <section class="view active" id="view-inicio">
+        <div class="hero">
+          <div class="hero-copy">
+            <p class="eyebrow">Sua semana, do jeito que ela cabe</p>
+            <h1>Você não precisa<br><em>dar conta de tudo.</em></h1>
+            <p id="week-phrase">Priorizar também é uma forma de cuidar de você.</p>
+            <button class="primary-action" type="button" data-go="descarrego">Começar pelo descarrego <span>→</span></button>
+          </div>
+          <div class="hero-note" aria-label="Lembrete da semana">
+            <span class="tape"></span>
+            <span class="doodle">♡</span>
+            <p>O que é essencial<br>não precisa ser enorme.</p>
+            <small>uma coisa de cada vez</small>
+          </div>
+        </div>
+
+        <div class="today-row">
+          <div><p class="eyebrow">Panorama</p><h2 id="current-week-title">Esta semana</h2></div>
+          <p id="current-week-dates" class="date-range"></p>
+        </div>
+
+        <div class="overview-grid">
+          <button class="overview-card terracotta" type="button" data-go="descarrego">
+            <span class="card-icon">≋</span><small>Descarrego</small><strong id="overview-inbox">0 coisas</strong><p>Tire tudo da cabeça primeiro.</p><b>abrir →</b>
+          </button>
+          <button class="overview-card sand" type="button" data-go="prioridades">
+            <span class="card-icon">✓</span><small>Prioridade real</small><strong id="overview-priority">Nenhuma</strong><p>O que precisa acontecer.</p><b>decidir →</b>
+          </button>
+          <button class="overview-card cocoa" type="button" data-go="rotina">
+            <span class="card-icon">♡</span><small>Base do dia</small><strong id="overview-routine">0 cuidados</strong><p>Você também entra na agenda.</p><b>cuidar →</b>
+          </button>
+          <button class="overview-card cream" type="button" data-go="agenda">
+            <span class="card-icon">□</span><small>Agenda possível</small><strong id="overview-scheduled">0 horários</strong><p>Espaço antes de compromisso.</p><b>organizar →</b>
+          </button>
+        </div>
+
+        <div class="gentle-banner"><span>“</span><p>Uma agenda boa não é a que cabe mais.<br><strong>É a que ainda deixa você caber nela.</strong></p><span>♡</span></div>
+      </section>
+
+      <section class="view" id="view-descarrego">
+        <div class="page-head"><div><p class="eyebrow">1 · Tire da cabeça</p><h1>Descarrego</h1><p>Escreva tudo, sem organizar e sem se julgar. A decisão vem depois.</p></div><span class="page-doodle">≋</span></div>
+        <form class="capture-box" id="capture-form">
+          <label for="task-input">O que está ocupando espaço na sua cabeça?</label>
+          <div class="capture-row"><input id="task-input" autocomplete="off" placeholder="Ex.: marcar consulta, responder aquele e-mail…"><button type="submit">Adicionar</button></div>
+          <p>Não precisa escrever bonito. Só precisa sair daí de dentro.</p>
+        </form>
+        <div class="list-toolbar"><div><h2>Caixa de entrada</h2><p><span id="task-total">0</span> itens para olhar com calma</p></div><select id="task-filter"><option value="all">Todos</option><option value="unclassified">Sem decidir</option><option value="priority">Prioridade</option><option value="scheduled">Com data</option><option value="someday">Sem data</option><option value="extra">Perfumaria</option><option value="drop">Pode deixar de existir</option><option value="done">Concluídos</option></select></div>
+        <div id="task-list" class="task-list"></div>
+      </section>
+
+      <section class="view" id="view-prioridades">
+        <div class="page-head"><div><p class="eyebrow">2 · Decida com gentileza</p><h1>O que merece espaço?</h1><p>Use os critérios abaixo. Prioridade não é tudo que importa — é o que precisa vir primeiro agora.</p></div><span class="page-doodle">✓</span></div>
+        <div class="criteria-grid">
+          <article class="criterion priority"><span>1</span><h3>É prioridade</h3><p>Tem consequência real se não for feito nesta semana, cuida de algo essencial ou destrava outras coisas.</p><small>Escolha poucas. Idealmente, até 3.</small></article>
+          <article class="criterion scheduled"><span>2</span><h3>Precisa de data</h3><p>É importante e tem um momento certo, prazo ou depende de outra pessoa.</p><small>Coloque na agenda com folga.</small></article>
+          <article class="criterion someday"><span>3</span><h3>Pode ficar sem data</h3><p>Precisa ser feito, mas não perde sentido se esperar. Fica guardado sem ocupar o hoje.</p><small>Você não está esquecendo.</small></article>
+          <article class="criterion extra"><span>4</span><h3>É perfumaria</h3><p>Seria gostoso, bonito ou melhoraria algo — mas só entra se houver tempo e energia.</p><small>“Se der” é uma categoria válida.</small></article>
+          <article class="criterion drop"><span>5</span><h3>Pode deixar de existir</h3><p>Talvez não precise ser feito. Pergunte: o que realmente acontece se eu simplesmente não fizer?</p><small>Retirar também é organizar.</small></article>
+        </div>
+        <section class="support-network" aria-labelledby="support-title">
+          <div class="support-copy"><p class="eyebrow">Quem pode carregar isso comigo?</p><h2 id="support-title">Minha rede de apoio</h2><p>Cadastre pessoas que podem assumir uma tarefa ou oferecer ajuda. Depois, escolha uma delas em cada item.</p></div>
+          <form id="support-form" class="support-form"><input id="support-name" autocomplete="off" placeholder="Ex.: João, minha irmã, equipe…" aria-label="Nome de quem pode ajudar"><button type="submit">Adicionar pessoa</button></form>
+          <div id="support-list" class="support-list"></div>
+        </section>
+        <div class="priority-board">
+          <div class="board-head"><div><h2>Suas decisões da semana</h2><p>Primeiro decida onde a tarefa fica. Depois, decida quem precisa carregá-la.</p></div><button type="button" class="soft-button" data-go="descarrego">+ adicionar itens</button></div>
+          <div id="priority-columns" class="priority-columns"></div>
+        </div>
+      </section>
+
+      <section class="view" id="view-rotina">
+        <div class="page-head"><div><p class="eyebrow">3 · Sustente o básico</p><h1>A rotina que eu quero ter</h1><p>Antes das tarefas, escolha o que você precisa para atravessar os dias minimamente bem.</p></div><span class="page-doodle">♡</span></div>
+        <div class="routine-intro"><div><h2>O que precisa existir no seu dia?</h2><p>Não é uma rotina perfeita. É um chão: água, comida, remédio, pausa, sono, movimento, silêncio — o que sustenta você.</p></div><span>o básico<br>também conta</span></div>
+        <form id="routine-form" class="routine-form">
+          <input id="routine-input" placeholder="Ex.: almoçar longe da tela" autocomplete="off">
+          <select id="routine-frequency"><option value="todos os dias">Todos os dias</option><option value="dias úteis">Dias úteis</option><option value="3× na semana">3× na semana</option><option value="1× na semana">1× na semana</option></select>
+          <button type="submit">Adicionar cuidado</button>
+        </form>
+        <div id="routine-list" class="routine-list"></div>
+        <div class="permission-note"><span>♡</span><p><strong>Permissão da semana</strong> Uma rotina mínima feita pela metade ainda pode ser o que sustenta um dia difícil.</p></div>
+      </section>
+
+      <section class="view" id="view-agenda">
+        <div class="page-head"><div><p class="eyebrow">4 · Dê lugar, não aperto</p><h1>Agenda possível</h1><p>Distribua só o que realmente precisa de dia e horário. Deixe respiro entre as coisas.</p></div><span class="page-doodle">□</span></div>
+        <div class="agenda-toolbar"><button type="button" id="agenda-prev" aria-label="Semana anterior">←</button><div><strong id="agenda-title">Esta semana</strong><small id="agenda-subtitle"></small></div><button type="button" id="agenda-next" aria-label="Próxima semana">→</button></div>
+        <div id="agenda-grid" class="agenda-grid"></div>
+        <div class="agenda-hint"><span>i</span><p><strong>Um combinado gentil:</strong> tente ocupar no máximo 60% do seu tempo disponível. Imprevistos também precisam caber.</p></div>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="schedule-dialog">
+    <form method="dialog" id="schedule-form">
+      <button class="dialog-close" value="cancel" aria-label="Fechar">×</button>
+      <p class="eyebrow">Colocar na agenda</p><h2 id="schedule-task-name">Tarefa</h2>
+      <label>Dia<select id="schedule-day"></select></label>
+      <label>Horário<input id="schedule-time" type="time" value="09:00"></label>
+      <div class="dialog-actions"><button value="cancel" class="soft-button">Cancelar</button><button value="default" id="confirm-schedule" class="primary-small">Agendar</button></div>
+    </form>
+  </dialog>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script src="./app.js"></script>
+</body>
+</html>

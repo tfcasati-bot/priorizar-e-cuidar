@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#4b2d20">
+  <meta name="description" content="Uma Roda da Vida gentil para observar as áreas da vida e escolher até três pequenas ações.">
+  <title>Minha Roda da Vida — Como Eu Dou Conta</title>
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./roda.css">
+</head>
+<body class="wheel-body">
+  <div class="app-shell">
+    <aside class="sidebar wheel-sidebar">
+      <a class="brand" href="./index.html"><span class="brand-heart">♡</span><span><small>Como Eu</small> Dou Conta</span></a>
+      <nav class="main-nav">
+        <a class="nav-item nav-link" href="./index.html"><span>⌂</span> Organização</a>
+        <a class="nav-item nav-link" href="./saude.html"><span>✚</span> Central de Saúde</a>
+        <button class="nav-item active" type="button"><span>◉</span> Minha Roda da Vida</button>
+      </nav>
+      <div class="wheel-side-note"><span>“</span><p>Não é uma prova sobre a sua vida.<br><strong>É só uma fotografia de agora.</strong></p></div>
+      <div class="save-card"><span class="save-dot"></span><div><strong id="wheel-save-status">Rascunho salvo</strong><small>neste navegador</small></div></div>
+      <div class="backup-actions"><button type="button" id="wheel-export">Baixar backup</button><label for="wheel-import">Restaurar</label><input id="wheel-import" type="file" accept="application/json" hidden></div>
+    </aside>
+
+    <main class="content wheel-content">
+      <header class="mobile-header"><button type="button" id="wheel-menu" aria-label="Abrir menu">☰</button><span>Minha Roda da Vida</span><span class="save-dot"></span></header>
+      <header class="wheel-head"><div><p class="eyebrow">Um retrato do momento</p><h1>Minha Roda<br><em>da Vida</em></h1><p>Dê uma nota de 1 a 5 para cada área. Não procure perfeição: perceba o que está bem e o que está pedindo cuidado.</p></div><label class="date-card">Data desta roda<input type="date" id="wheel-date"></label></header>
+
+      <section class="wheel-workspace">
+        <div class="chart-panel">
+          <svg id="life-wheel" viewBox="0 0 440 440" role="img" aria-labelledby="wheel-chart-title wheel-chart-desc">
+            <title id="wheel-chart-title">Gráfico da Roda da Vida</title>
+            <desc id="wheel-chart-desc">Cada setor mostra uma área da vida avaliada de um a cinco.</desc>
+            <g id="wheel-background"></g><g id="wheel-values"></g><g id="wheel-labels"></g>
+            <circle cx="220" cy="220" r="43" fill="#fffaf2" stroke="#d9c2ad"></circle>
+            <text x="220" y="214" text-anchor="middle" class="wheel-center-label">minha vida</text>
+            <text x="220" y="235" text-anchor="middle" class="wheel-center-score" id="wheel-average">3,0</text>
+          </svg>
+          <div class="chart-legend"><span>1 · precisa de atenção</span><span>5 · está me sustentando</span></div>
+        </div>
+        <div class="ratings-panel"><div class="panel-intro"><h2>Como cada área está hoje?</h2><p>Escolha a sensação que mais se aproxima. A resposta pode mudar — e tudo bem.</p></div><div id="rating-list" class="rating-list"></div></div>
+      </section>
+
+      <section class="insight-banner"><span>♡</span><div><p class="eyebrow">Olhar gentil</p><strong id="wheel-insight">Você não precisa melhorar tudo ao mesmo tempo.</strong><p id="wheel-insight-detail">Escolha uma área que faria diferença e comece pequeno.</p></div></section>
+
+      <section class="actions-section">
+        <div class="section-heading"><div><p class="eyebrow">Do olhar para o possível</p><h2>Até três ações leves</h2><p>Uma ação boa é pequena o suficiente para caber na vida real.</p></div><span>não precisa preencher as três</span></div>
+        <div id="gentle-actions" class="gentle-actions"></div>
+      </section>
+
+      <div class="wheel-actions"><button type="button" id="new-wheel" class="soft-button">Limpar e começar outra</button><button type="button" id="save-wheel" class="primary-action">Salvar esta Roda ♡</button></div>
+
+      <section class="history-section"><div class="section-heading"><div><p class="eyebrow">Para perceber mudanças</p><h2>Minhas Rodas salvas</h2><p>Compare momentos diferentes sem transformar evolução em cobrança.</p></div></div><div id="wheel-history" class="wheel-history"></div></section>
+    </main>
+  </div>
+  <div id="wheel-toast" role="status" aria-live="polite"></div>
+  <script src="./roda.js"></script>
+</body>
+</html>

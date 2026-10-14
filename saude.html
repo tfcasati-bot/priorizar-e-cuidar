@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#4b2d20">
+  <meta name="description" content="Uma central gentil para lembrar dos cuidados de saúde da mulher e acompanhar a gestação.">
+  <title>Central de Saúde — Como Eu Dou Conta</title>
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./saude.css">
+</head>
+<body class="health-body">
+  <div class="app-shell health-shell">
+    <aside class="sidebar health-sidebar">
+      <a class="brand" href="./index.html"><span class="brand-heart">♡</span><span><small>Como Eu</small> Dou Conta</span></a>
+      <nav class="main-nav">
+        <a class="nav-item nav-link" href="./index.html"><span>⌂</span> Organização</a>
+        <button class="nav-item active" type="button"><span>✚</span> Central de Saúde</button>
+        <a class="nav-item nav-link" href="./roda.html"><span>◉</span> Minha Roda da Vida</a>
+      </nav>
+      <div class="weeks-block profiles-block">
+        <div class="weeks-heading"><span>Perfis</span><button type="button" id="add-profile" aria-label="Adicionar perfil">+</button></div>
+        <div id="profile-list" class="week-list"></div>
+      </div>
+      <div class="health-privacy"><span>⌂</span><p><strong>Fica neste aparelho</strong>Os dados são salvos somente neste navegador.</p></div>
+      <div class="save-card"><span class="save-dot"></span><div><strong id="health-save-status">Tudo salvo</strong><small>neste navegador</small></div></div>
+      <div class="backup-actions"><button type="button" id="health-export">Baixar backup</button><label for="health-import">Restaurar</label><input id="health-import" type="file" accept="application/json" hidden></div>
+    </aside>
+
+    <main class="content health-content">
+      <header class="mobile-header"><button type="button" id="health-menu" aria-label="Abrir menu">☰</button><span>Central de Saúde</span><span class="save-dot"></span></header>
+      <section id="health-empty" class="health-empty">
+        <span>♡</span><p class="eyebrow">Um cuidado de cada vez</p><h1>Sua saúde também<br>entra na lista.</h1><p>Crie um perfil para receber lembretes gentis de cuidado. Sem cobrança, sem diagnóstico e sem substituir sua equipe de saúde.</p><button class="primary-action" id="empty-add" type="button">Criar meu primeiro perfil →</button>
+      </section>
+
+      <section id="health-dashboard" hidden>
+        <header class="health-head">
+          <div><p class="eyebrow" id="profile-kicker">Central de Saúde</p><h1>Oi, <span id="profile-name">você</span>.</h1><p id="profile-intro">Vamos cuidar do que sustenta você?</p></div>
+          <div class="health-head-actions"><button type="button" id="edit-profile" class="soft-button">Editar perfil</button><button type="button" id="delete-profile" class="icon-button danger" title="Excluir perfil">×</button></div>
+        </header>
+
+        <div id="woman-dashboard">
+          <section class="health-hero woman-hero"><div><p class="eyebrow">Sua lista gentil</p><h2>Cuidar de você não precisa virar outra cobrança.</h2><p>Estes lembretes ajudam a preparar uma conversa com a UBS ou profissional que acompanha você.</p></div><span class="health-scribble">comece<br>pelo possível ♡</span></section>
+          <div class="health-summary" id="woman-summary"></div>
+          <section class="health-section"><div class="section-heading"><div><p class="eyebrow">Para lembrar com carinho</p><h2>Meu cuidado essencial</h2></div><span id="care-progress">0 de 0 vistos</span></div><div id="woman-checklist" class="gentle-checklist"></div></section>
+          <section class="health-section"><div class="section-heading"><div><p class="eyebrow">Seu espaço</p><h2>O que eu quero conversar na próxima consulta</h2></div></div><textarea id="woman-notes" class="health-notes" placeholder="Sintomas, dúvidas, mudanças no corpo, sono, humor, ciclo, medicamentos…"></textarea></section>
+        </div>
+
+        <div id="pregnancy-dashboard" hidden>
+          <section class="pregnancy-hero" id="pregnancy-hero"><div><p class="eyebrow">Sua gestação hoje</p><h2 id="pregnancy-week">Calcule sua semana</h2><p>Cada consulta é também um espaço para você ser ouvida.</p></div><div class="due-card"><small>Data provável do parto</small><strong id="due-date">—</strong><span id="days-left"></span></div></section>
+          <div class="pregnancy-stats"><article><span>○</span><small>Trimestre</small><strong id="trimester">—</strong></article><article><span>✓</span><small>Contatos sugeridos pela OMS</small><strong><span id="visit-count">0</span> de 8</strong></article><article><span>□</span><small>Imagem essencial</small><strong>1 antes de 24 sem.</strong></article></div>
+
+          <section class="health-section birth-plan-section"><div class="section-heading"><div><p class="eyebrow">Plano de parto flexível</p><h2>Três coisas para pensar</h2><p>Não é escolher um resultado perfeito. É registrar o que importa mesmo se o caminho mudar.</p></div></div><div class="birth-plan-grid">
+            <label><span>1 · Meu desejo</span><small>Ex.: tentar parto vaginal, ter liberdade de posição.</small><textarea data-plan="first" placeholder="O que eu gostaria, se estiver tudo bem?"></textarea></label>
+            <label><span>2 · Se precisar mudar</span><small>Ex.: cesárea quando houver indicação e explicação clara.</small><textarea data-plan="second" placeholder="O que me ajuda a me sentir segura?"></textarea></label>
+            <label><span>3 · Em qualquer cenário</span><small>Ex.: acompanhante, respeito, contato pele a pele quando possível.</small><textarea data-plan="third" placeholder="O que eu quero preservar sempre?"></textarea></label>
+          </div></section>
+
+          <section class="health-section"><div class="section-heading"><div><p class="eyebrow">Pré-natal</p><h2>Oito encontros para se orientar</h2><p>A OMS sugere contatos até 12, 20, 26, 30, 34, 36, 38 e 40 semanas. O SUS pode usar uma frequência maior: mensal, quinzenal e depois semanal.</p></div></div><div id="visit-roadmap" class="visit-roadmap"></div></section>
+          <section class="health-section"><div class="section-heading"><div><p class="eyebrow">Linha do tempo gentil</p><h2>O que costuma entrar na conversa</h2><p>É um roteiro para lembrar e perguntar — não uma prescrição. A equipe ajusta conforme seu histórico, resultados e risco.</p></div></div><div id="pregnancy-timeline" class="pregnancy-timeline"></div></section>
+          <section class="danger-signs"><span>!</span><div><strong>Procure atendimento sem esperar</strong><p>Sangramento, dor forte na barriga, dor de cabeça intensa, febre alta, inchaço importante, falta de ar, alteração visual ou redução dos movimentos do bebê precisam de avaliação. Em dúvida, procure seu serviço de saúde.</p></div></section>
+        </div>
+
+        <details class="sources-panel"><summary>Fontes e limites desta Central</summary><p>Conteúdo educativo para organizar perguntas e lembretes; não faz diagnóstico, não define risco e não substitui atendimento.</p><ul><li><a href="https://www.who.int/publications/i/item/9789241549912" target="_blank" rel="noreferrer">OMS — cuidado pré-natal para uma experiência positiva</a></li><li><a href="https://www.gov.br/saude/pt-br/assuntos/saude-de-a-a-z/g/gravidez/pre-natal" target="_blank" rel="noreferrer">Ministério da Saúde — Pré-natal</a></li><li><a href="https://www.gov.br/saude/pt-br/assuntos/saude-de-a-a-z/g/gravidez/exames-e-vacinas" target="_blank" rel="noreferrer">Ministério da Saúde — Exames e vacinas</a></li><li><a href="https://www.gov.br/saude/pt-br/assuntos/saude-de-a-a-z/s/saude-da-mulher" target="_blank" rel="noreferrer">Ministério da Saúde — Saúde da mulher</a></li></ul></details>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="profile-dialog" class="profile-dialog"><form method="dialog" id="profile-form"><button class="dialog-close" value="cancel" aria-label="Fechar">×</button><p class="eyebrow">Perfil de cuidado</p><h2 id="profile-dialog-title">Adicionar perfil</h2><input type="hidden" id="editing-profile-id"><label>Como quer chamar este perfil?<input id="new-profile-name" required placeholder="Ex.: Talita"></label><label>Tipo de cuidado<select id="new-profile-type"><option value="woman">Saúde da mulher</option><option value="pregnancy">Gestação</option></select></label><label>Data de nascimento <small>(opcional)</small><input id="new-profile-birth" type="date"></label><div id="pregnancy-fields" hidden><label>Você sabe…<select id="date-mode"><option value="lmp">A data da última menstruação</option><option value="due">A data provável do parto</option></select></label><label id="lmp-label">Primeiro dia da última menstruação<input id="profile-lmp" type="date"></label><label id="due-label" hidden>Data provável do parto<input id="profile-due" type="date"></label><label>Paleta do quadro<select id="baby-theme"><option value="neutral">Neutra — ainda não sei / não quero definir</option><option value="girl">Menina — rosa suave</option><option value="boy">Menino — azul suave</option></select></label></div><div class="dialog-actions"><button value="cancel" class="soft-button">Cancelar</button><button type="submit" class="primary-small">Salvar perfil</button></div></form></dialog>
+  <div id="health-toast" role="status" aria-live="polite"></div>
+  <script src="./saude.js"></script>
+</body>
+</html>
